@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_authors"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_authors" />
+        <item
+            android:id="@+id/nav_students"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_students" />
+        <item
+            android:id="@+id/nav_biography"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_biography" />
+        <item
+            android:id="@+id/nav_game_one"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/menu_game_one" />
+        <item
+            android:id="@+id/nav_game_two"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/menu_game_two"/>
+    </group>
+
+</menu>

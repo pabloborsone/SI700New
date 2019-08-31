@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Aula 03 - Fragmentos</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_contacts">Contato</string>
+
+    <string name="menu_authors">Autores</string>
+    <string name="menu_students">Alunos</string>
+    <string name="menu_biography">Biografias</string>
+    <string name="menu_game_one">Jogo 1</string>
+    <string name="menu_game_two">Jogo 2</string>
+    <string name="menu_send">Send</string>
+
+    <string name="first_name">Pablo Borsone</string>
+    <string name="first_ra">RA: 185296</string>
+    <string name="first_description">Uma pessoa interessada pela vida e ainda mais por Android.</string>
+    <string name="second_name">Matheus Bonafé</string>
+    <string name="second_ra">RA: 203380</string>
+    <string name="second_description">Just a guy tripping in this world. No drugs. Just weed, ofc.</string>
+
+    <string name="menu_title">Communicate</string>
+
+    <string name="menu_home">Home</string>
+
+    <string name="menu_gallery">Gallery</string>
+
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="menu_tools">Tools</string>
+
+    <string name="menu_share">Share</string>
+
+    <string name="icon_text">what is going on</string>
+
+    <string name="to_label">To</string>
+
+    <string name="to_hint">Who to send</string>
+
+    <string name="message">Message</string>
+
+    <string name="send">Send</string>
+
+    <string name="password">Password:</string>
+
+    <string name="subject">Subject</string>
+
+    <string name="linear_login">Login:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
