@@ -12,44 +12,26 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <TextView
-        android:id="@+id/to_label"
+        android:id="@+id/to_recipient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="14dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/to_label"/>
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:text="@string/to_recipient"/>
 
     <EditText
-        android:id="@+id/edit_subject"
+        android:id="@+id/recipient_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/to_hint"
-        android:layout_toEndOf="@id/to_label"
-        android:layout_alignParentEnd="true"
-        />
-
-    <Button
-        android:id="@+id/send_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/send" />
-
-    <EditText
-        android:id="@+id/edit_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/message"
-        android:gravity="top"
+        android:hint="Type your Recipient"
         android:inputType="text"
+        android:gravity="top"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/to_label"
-
-        android:paddingTop="20dp"
+        android:layout_below="@id/to_recipient"
+        android:layout_margin="0dp"
         />
+
 
     <TextView
         android:id="@+id/relative_login"
@@ -57,7 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/edit_message"
+        android:textColor="@color/black"
+        android:layout_below="@+id/recipient_hint"
         android:text="@string/linear_login"/>
 
     <EditText
@@ -77,7 +60,9 @@
         android:id="@+id/relative_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
+        android:textColor="@color/black"
         android:layout_below="@+id/relative_login_text"
         android:text="@string/password"/>
 
@@ -96,8 +81,9 @@
         android:id="@+id/relative_about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
+        android:textColor="@color/black"
         android:layout_below="@+id/relative_password_text"
         android:text="@string/subject" />
 
@@ -111,6 +97,27 @@
         android:layout_below="@id/relative_about"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true" />
+
+    <EditText
+        android:id="@+id/edit_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/message"
+        android:gravity="center"
+        android:inputType="text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/relative_about_text"
+        android:layout_above="@+id/send_button"
+        android:paddingTop="20dp" />
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/send" />
 
 
 </RelativeLayout>

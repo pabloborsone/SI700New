@@ -20,7 +20,7 @@
     <string name="first_description">Uma pessoa interessada pela vida e ainda mais por Android.</string>
     <string name="second_name">Matheus Bonafé</string>
     <string name="second_ra">RA: 203380</string>
-    <string name="second_description">Just a guy tripping in this world. No drugs. Just weed, ofc.</string>
+    <string name="second_description">Entusiasta por tudo que é tecnologia e basquete.</string>
 
     <string name="menu_title">Communicate</string>
 
@@ -36,17 +36,15 @@
 
     <string name="icon_text">what is going on</string>
 
-    <string name="to_label">To</string>
+    <string name="to_recipient">Recipient:</string>
 
-    <string name="to_hint">Who to send</string>
-
-    <string name="message">Message</string>
+    <string name="message">Type your Message</string>
 
     <string name="send">Send</string>
 
     <string name="password">Password:</string>
 
-    <string name="subject">Subject</string>
+    <string name="subject">Subject:</string>
 
     <string name="linear_login">Login:</string>
 
