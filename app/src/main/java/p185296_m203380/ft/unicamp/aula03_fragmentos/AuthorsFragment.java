@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 
@@ -23,20 +23,27 @@ public class AuthorsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (view == null) {
             view = inflater.inflate(R.layout.authors_fragment, container, false);
         }
-
-        String text = getArguments().getString("message");
-        AuthorsFragment authorsFragment = (AuthorsFragment) getFragmentManager().findFragmentById(R.id.authors_frame);
-        View frag =  authorsFragment.view;
-        TextView randomText = frag.findViewById(R.id.random_message);
-        randomText.setText(text);
-
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (getArguments() == null) {
+            TextView randomText = view.findViewById(R.id.random_message);
+            randomText.setText(getText(R.string.random_text_not_found));
+        } else {
+            String text = getArguments().getString("message");
+            TextView randomText = view.findViewById(R.id.random_message);
+            randomText.setText(text);
+        }
     }
 
 }

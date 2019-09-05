@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager fragmentManager;
+    public static final String AUTHORS_KEY = "authors";
+    public static final String MAIL_KEY = "mail";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,6 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
     }
 
     @Override
@@ -62,11 +63,11 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.action_contact) {
-            Fragment mailFragment = fragmentManager.findFragmentByTag("mail");
+            Fragment mailFragment = fragmentManager.findFragmentByTag(MainActivity.MAIL_KEY);
             if (mailFragment == null) {
                 mailFragment = new MailFragment();
             }
-            replaceFragment(mailFragment, "mail");
+            replaceFragment(mailFragment, MainActivity.MAIL_KEY);
             return true;
         }
 
@@ -83,11 +84,11 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (id == R.id.nav_authors) {
-            Fragment authorFragment = fragmentManager.findFragmentByTag("authors");
+            Fragment authorFragment = fragmentManager.findFragmentByTag(MainActivity.AUTHORS_KEY);
             if (authorFragment == null) {
                 authorFragment = new AuthorsFragment();
             }
-            replaceFragment(authorFragment, "authors");
+            replaceFragment(authorFragment, MainActivity.AUTHORS_KEY);
         } else if (id == R.id.nav_students) {
 
         } else if (id == R.id.nav_biography) {

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -25,34 +26,40 @@ public class MailFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if (view == null) {
+        if (view == null || savedInstanceState == null) {
             view = inflater.inflate(R.layout.fragment_mail, container, false);
         }
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         Button enviar = view.findViewById(R.id.send_button);
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MailFragment mailFragment = (MailFragment) getFragmentManager().findFragmentById(R.id.authors_frame);
-                View frag = mailFragment.view;
-                EditText subject = frag.findViewById(R.id.relative_about_text);
+                EditText subject = MailFragment.this.view.findViewById(R.id.edit_message);
                 String subjectText = subject.getText().toString();
                 Bundle bundle = new Bundle();
                 bundle.putString("message", subjectText);
                 AuthorsFragment authorsFragment = new AuthorsFragment();
                 authorsFragment.setArguments(bundle);
-                replaceFragment(authorsFragment, "authors");
+                replaceFragment(authorsFragment);
             }
         });
-        return view;
     }
 
-    private void replaceFragment(Fragment fragment, String tag) {
+    private void replaceFragment(Fragment fragment) {
+        if (getFragmentManager() == null) {
+            setTargetFragment(fragment, 0);
+        }
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.authors_frame, fragment, tag);
+        fragmentTransaction.replace(R.id.authors_frame, fragment, MainActivity.AUTHORS_KEY);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

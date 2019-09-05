@@ -4,11 +4,11 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/white"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <TextView
@@ -16,100 +16,100 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:text="@string/to_recipient"/>
+        android:text="@string/to_recipient"
+        android:textColor="@color/black" />
 
     <EditText
         android:id="@+id/recipient_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Type your Recipient"
-        android:inputType="text"
-        android:gravity="top"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_below="@id/to_recipient"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_margin="0dp"
-        />
+        android:gravity="top"
+        android:hint="@string/mail_recipient_hint"
+        android:inputType="text" />
 
 
     <TextView
         android:id="@+id/relative_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentLeft="true"
-        android:textColor="@color/black"
         android:layout_below="@+id/recipient_hint"
-        android:text="@string/linear_login"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/linear_login"
+        android:textColor="@color/black" />
 
     <EditText
         android:id="@+id/relative_login_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Type your Login"
-        android:inputType="text"
-        android:gravity="top"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_below="@id/relative_login"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_margin="0dp"
-        />
+        android:gravity="top"
+        android:hint="@string/mail_login_hint"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress" />
 
     <TextView
         android:id="@+id/relative_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentLeft="true"
-        android:textColor="@color/black"
         android:layout_below="@+id/relative_login_text"
-        android:text="@string/password"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/password"
+        android:textColor="@color/black" />
 
     <EditText
         android:id="@+id/relative_password_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Type your Password"
-        android:inputType="textPassword"
+        android:layout_below="@id/relative_password"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:gravity="top"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/relative_password" />
+        android:hint="@string/mail_password_hint"
+        android:importantForAutofill="no"
+        android:inputType="textPassword" />
 
     <TextView
         android:id="@+id/relative_about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentLeft="true"
-        android:textColor="@color/black"
         android:layout_below="@+id/relative_password_text"
-        android:text="@string/subject" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/subject"
+        android:textColor="@color/black" />
 
     <EditText
         android:id="@+id/relative_about_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Type your Subject"
-        android:inputType="text"
-        android:gravity="top"
         android:layout_below="@id/relative_about"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="top"
+        android:hint="@string/mail_subject_hint"
+        android:inputType="textEmailSubject" />
 
     <EditText
         android:id="@+id/edit_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/message"
-        android:gravity="center"
-        android:inputType="text"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/relative_about_text"
         android:layout_above="@+id/send_button"
-        android:paddingTop="20dp" />
+        android:layout_below="@id/relative_about_text"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/back"
+        android:gravity="center"
+        android:hint="@string/message"
+        android:inputType="text" />
 
     <Button
         android:id="@+id/send_button"
@@ -118,6 +118,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="@string/send" />
-
 
 </RelativeLayout>
