@@ -15,12 +15,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
+import alunos.AlunosFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager fragmentManager;
     public static final String AUTHORS_KEY = "authors";
     public static final String MAIL_KEY = "mail";
+    public static final String STUDENTS_KEY = "students";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +93,11 @@ public class MainActivity extends AppCompatActivity
             }
             replaceFragment(authorFragment, MainActivity.AUTHORS_KEY);
         } else if (id == R.id.nav_students) {
-
+            Fragment studentFragment = fragmentManager.findFragmentByTag(MainActivity.STUDENTS_KEY);
+            if (studentFragment == null) {
+                studentFragment = new AlunosFragment();
+            }
+            replaceFragment(studentFragment, MainActivity.STUDENTS_KEY);
         } else if (id == R.id.nav_biography) {
 
         } else if (id == R.id.nav_game_one) {

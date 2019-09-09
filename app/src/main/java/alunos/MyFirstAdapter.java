@@ -1,5 +1,6 @@
 package alunos;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,61 +16,62 @@ import p185296_m203380.ft.unicamp.aula03_fragmentos.R;
 public class MyFirstAdapter extends RecyclerView.Adapter {
 
     private ArrayList<Aluno> alunos;
-    private myFirstViewHolder myOnItemClickListener;
+    private MyOnItemClickListener myOnItemClickListener;
 
-    class myFirstViewHolder extends RecyclerView.ViewHolder {
+    public MyFirstAdapter(ArrayList<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+    public class MyFirstViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView txtNome;
         private TextView txtDescription;
 
-        public myFirstViewHolder(View itemView) {
+        public MyFirstViewHolder(View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView);
+            imageView = itemView.findViewById(R.id.imagem_aluno);
             txtNome = itemView.findViewById(R.id.nome_aluno);
             txtDescription = itemView.findViewById(R.id.descricao_aluno);
         }
 
         public void bind(final Aluno aluno) {
             txtNome.setText(aluno.getNome());
-            txtDescription.setText(aluno.getDescrição());
+            txtDescription.setText(Html.fromHtml(aluno.getDescricao()));
             imageView.setImageResource(aluno.getFoto());
-        }
-
-        view.setOnClickListener(new View.OnClickListener) {
-            @Override
-            public void onClick(View view) {
-                if(myOnItemClickListener != null) {
-                    TextView txt = view.findViewById(R.id.nome_aluno);
-                    myOnItemClickListener.myOnItemClick(txt.get);
-                }
-            }
-
-        }
-
-
-        public void setMyOnItemClickListener(MyOnItemClickListener myOnItemClickListener) {
-            this.myOnItemClickListener = myOnItemClickListener;
         }
     }
 
-
-    public myFirstViewHolder onCreateViewHolder(ViewGroup parent, int viewtType) {
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_layout, parent, false);
-        myFirstViewHolder myFirstViewHolder = new myFirstViewHolder(view);
-        return myFirstViewHolder;
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (myOnItemClickListener != null) {
+                    TextView txt = view.findViewById(R.id.nome_aluno);
+                    myOnItemClickListener.myOnItemClick(txt.getText().toString());
+                }
+            }
+        });
+        return new MyFirstViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Aluno aluno = alunos.alunos.get(position);
-        ((MyFirstViewHolder)holder).onBind(aluno);
+        ((MyFirstViewHolder) holder).bind(alunos.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return alunos.alunos.size();
+        return alunos.size();
     }
 
+    public interface MyOnItemClickListener {
+        void myOnItemClick(String nome);
+    }
 
-
+    public void setMyOnItemClickListener(MyOnItemClickListener myOnItemClickListener) {
+        this.myOnItemClickListener = myOnItemClickListener;
+    }
 }
