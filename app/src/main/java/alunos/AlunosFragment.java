@@ -51,6 +51,15 @@ public class AlunosFragment extends Fragment {
             }
         });
 
+        mAdapter.setMyOnItemLongClickListener(new MyFirstAdapter.MyOnItemLongClickListener() {
+            @Override
+            public void myOnItemLongClick(ArrayList list, int position) {
+               list.remove(position);
+               mAdapter.notifyItemRemoved(position);
+               mAdapter.notifyItemRangeChanged(position, list.size());
+            }
+        });
+
         return view;
     }
 
