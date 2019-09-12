@@ -4,13 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:gravity="center"
-    android:paddingBottom="10dp">
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_horizontal">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imagem_aluno"
         android:layout_width="200dp"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"/>
 
     <TextView
         android:id="@+id/nome_aluno"
@@ -18,7 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:paddingBottom="10dp"/>
 
     <TextView
         android:id="@+id/descricao_aluno"
@@ -26,6 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:maxLines="5"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"/>
 
 </LinearLayout>

@@ -10,6 +10,7 @@
     tools:showIn="@layout/app_bar_main">
 
     <TextView
+        android:id="@+id/welcome_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="64dp"

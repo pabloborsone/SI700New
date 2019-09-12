@@ -4,6 +4,6 @@
     <string name="mail_subject_hint">Type your Subject</string>
     <string name="mail_login_hint">Type your Login</string>
     <string name="mail_recipient_hint">Type your Recipient</string>
-    <string name="main_welcome_text">Welcome! We hope you have some nice experience around here! (:</string>
+    <string name="main_welcome_text">Welcome! We hope you have a nice experience around here! (:</string>
     <string name="authors_message_received">Mensagem:</string>
 </resources>

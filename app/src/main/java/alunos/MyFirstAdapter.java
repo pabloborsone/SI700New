@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class MyFirstAdapter extends RecyclerView.Adapter {
         }
     }
 
+    @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_layout, parent, false);
@@ -66,13 +68,14 @@ public class MyFirstAdapter extends RecyclerView.Adapter {
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                    if (myOnItemLongClickListener != null)
-                        myOnItemLongClickListener.myOnItemLongClick(alunos, position);
+                if (myOnItemLongClickListener != null)
+                    myOnItemLongClickListener.myOnItemLongClick(alunos, position);
                 return false;
             }
         });
 
     }
+
     @Override
     public int getItemCount() {
         return alunos.size();
@@ -83,14 +86,14 @@ public class MyFirstAdapter extends RecyclerView.Adapter {
     }
 
     public interface MyOnItemLongClickListener {
-        void myOnItemLongClick (ArrayList list, int position);
+        void myOnItemLongClick(ArrayList list, int position);
     }
 
     public void setMyOnItemClickListener(MyOnItemClickListener myOnItemClickListener) {
         this.myOnItemClickListener = myOnItemClickListener;
     }
 
-    public void setMyOnItemLongClickListener (MyOnItemLongClickListener myOnItemLongClickListener){
+    public void setMyOnItemLongClickListener(MyOnItemLongClickListener myOnItemLongClickListener) {
         this.myOnItemLongClickListener = myOnItemLongClickListener;
     }
 }

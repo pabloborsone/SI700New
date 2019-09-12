@@ -3,6 +3,7 @@ package p185296_m203380.ft.unicamp.aula03_fragmentos;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -116,6 +117,14 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.authors_frame, fragment, tag);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    public void hideMainActivityElements() {
+        findViewById(R.id.welcome_text_view).setVisibility(View.GONE);
+    }
+
+    public void showMainActivityElements() {
+        findViewById(R.id.welcome_text_view).setVisibility(View.VISIBLE);
     }
 
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import p185296_m203380.ft.unicamp.aula03_fragmentos.MainActivity;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.R;
 
 
@@ -29,11 +31,14 @@ public class AlunosFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_alunos, container, false);
+        }
+        if (getActivity() != null) {
+            ((MainActivity)getActivity()).hideMainActivityElements();
         }
 
         mRecyclerView = view.findViewById(R.id.alunos_recycler_view);
@@ -47,20 +52,27 @@ public class AlunosFragment extends Fragment {
         mAdapter.setMyOnItemClickListener(new MyFirstAdapter.MyOnItemClickListener() {
             @Override
             public void myOnItemClick(String nome) {
-                Toast.makeText(view.getContext(), "oi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), nome, Toast.LENGTH_SHORT).show();
             }
         });
 
         mAdapter.setMyOnItemLongClickListener(new MyFirstAdapter.MyOnItemLongClickListener() {
             @Override
             public void myOnItemLongClick(ArrayList list, int position) {
-               list.remove(position);
-               mAdapter.notifyItemRemoved(position);
-               mAdapter.notifyItemRangeChanged(position, list.size());
+                list.remove(position);
+                mAdapter.notifyDataSetChanged();
             }
         });
 
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (getActivity() != null) {
+            ((MainActivity)getActivity()).showMainActivityElements();
+        }
+    }
 }
