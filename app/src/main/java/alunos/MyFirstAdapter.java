@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import p185296_m203380.ft.unicamp.aula03_fragmentos.MainActivity;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.R;
 
 public class MyFirstAdapter extends RecyclerView.Adapter {
@@ -69,7 +70,7 @@ public class MyFirstAdapter extends RecyclerView.Adapter {
             @Override
             public boolean onLongClick(View view) {
                 if (myOnItemLongClickListener != null)
-                    myOnItemLongClickListener.myOnItemLongClick(alunos, position);
+                    myOnItemLongClickListener.myOnItemLongClick(position);
                 return false;
             }
         });
@@ -86,7 +87,7 @@ public class MyFirstAdapter extends RecyclerView.Adapter {
     }
 
     public interface MyOnItemLongClickListener {
-        void myOnItemLongClick(ArrayList list, int position);
+        void myOnItemLongClick(int position);
     }
 
     public void setMyOnItemClickListener(MyOnItemClickListener myOnItemClickListener) {

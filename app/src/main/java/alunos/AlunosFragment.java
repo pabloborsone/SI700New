@@ -8,45 +8,40 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import p185296_m203380.ft.unicamp.aula03_fragmentos.BiographyFragment;
+import p185296_m203380.ft.unicamp.aula03_fragmentos.FragmentController;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.MainActivity;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.R;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class AlunosFragment extends Fragment {
-    private RecyclerView mRecyclerView;
-    private MyFirstAdapter mAdapter;
+public class AlunosFragment extends Fragment implements FragmentController {
     private View view;
 
     public AlunosFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_alunos, container, false);
         }
         if (getActivity() != null) {
-            ((MainActivity)getActivity()).hideMainActivityElements();
+            ((MainActivity) getActivity()).hideMainActivityElements();
         }
 
-        mRecyclerView = view.findViewById(R.id.alunos_recycler_view);
+        RecyclerView mRecyclerView = view.findViewById(R.id.alunos_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        mAdapter = new MyFirstAdapter(new ArrayList<>(Arrays.asList(Alunos.alunos)));
+        MyFirstAdapter mAdapter = new MyFirstAdapter(new ArrayList<>(Arrays.asList(Alunos.alunos)));
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setMyOnItemClickListener(new MyFirstAdapter.MyOnItemClickListener() {
@@ -58,9 +53,12 @@ public class AlunosFragment extends Fragment {
 
         mAdapter.setMyOnItemLongClickListener(new MyFirstAdapter.MyOnItemLongClickListener() {
             @Override
-            public void myOnItemLongClick(ArrayList list, int position) {
-                list.remove(position);
-                mAdapter.notifyDataSetChanged();
+            public void myOnItemLongClick(int position) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+                BiographyFragment biography = new BiographyFragment();
+                biography.setArguments(bundle);
+                replaceFragment(biography, MainActivity.BIOGRAPHY_KEY);
             }
         });
 
@@ -72,7 +70,17 @@ public class AlunosFragment extends Fragment {
         super.onDestroy();
 
         if (getActivity() != null) {
-            ((MainActivity)getActivity()).showMainActivityElements();
+            ((MainActivity) getActivity()).showMainActivityElements();
         }
+    }
+
+    public void replaceFragment(Fragment fragment, String key) {
+        if (getFragmentManager() == null) {
+            setTargetFragment(fragment, 0);
+        }
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.authors_frame, fragment, key);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

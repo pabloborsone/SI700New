@@ -12,23 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class MailFragment extends Fragment {
+public class MailFragment extends Fragment implements FragmentController {
 
     private View view;
 
     public MailFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         if (view == null || savedInstanceState == null) {
             view = inflater.inflate(R.layout.fragment_mail, container, false);
         }
@@ -49,17 +43,17 @@ public class MailFragment extends Fragment {
                 bundle.putString("message", subjectText);
                 AuthorsFragment authorsFragment = new AuthorsFragment();
                 authorsFragment.setArguments(bundle);
-                replaceFragment(authorsFragment);
+                replaceFragment(authorsFragment, MainActivity.AUTHORS_KEY);
             }
         });
     }
 
-    private void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment, String key) {
         if (getFragmentManager() == null) {
             setTargetFragment(fragment, 0);
         }
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.authors_frame, fragment, MainActivity.AUTHORS_KEY);
+        fragmentTransaction.replace(R.id.authors_frame, fragment, key);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

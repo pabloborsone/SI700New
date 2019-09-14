@@ -6,4 +6,6 @@
     <string name="mail_recipient_hint">Type your Recipient</string>
     <string name="main_welcome_text">Welcome! We hope you have a nice experience around here! (:</string>
     <string name="authors_message_received">Mensagem:</string>
+    <string name="previous_biography_button_text">prev</string>
+    <string name="next_biography_button_text">next</string>
 </resources>

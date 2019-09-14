@@ -19,12 +19,13 @@ import com.google.android.material.navigation.NavigationView;
 import alunos.AlunosFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentController {
 
     private FragmentManager fragmentManager;
     public static final String AUTHORS_KEY = "authors";
     public static final String MAIL_KEY = "mail";
     public static final String STUDENTS_KEY = "students";
+    public static final String BIOGRAPHY_KEY = "biography";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +101,11 @@ public class MainActivity extends AppCompatActivity
             }
             replaceFragment(studentFragment, MainActivity.STUDENTS_KEY);
         } else if (id == R.id.nav_biography) {
-
+            Fragment biographyFragment = fragmentManager.findFragmentByTag(MainActivity.BIOGRAPHY_KEY);
+            if (biographyFragment == null) {
+                biographyFragment = new BiographyFragment();
+            }
+            replaceFragment(biographyFragment, MainActivity.BIOGRAPHY_KEY);
         } else if (id == R.id.nav_game_one) {
 
         } else if (id == R.id.nav_game_two) {
