@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 
 import alunos.AlunosFragment;
+import puzzle.PuzzleFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentController {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     public static final String MAIL_KEY = "mail";
     public static final String STUDENTS_KEY = "students";
     public static final String BIOGRAPHY_KEY = "biography";
+    public static final String PUZZLE_KEY = "puzzle";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +109,11 @@ public class MainActivity extends AppCompatActivity
             }
             replaceFragment(biographyFragment, MainActivity.BIOGRAPHY_KEY);
         } else if (id == R.id.nav_game_one) {
-
+            Fragment puzzleFragment = fragmentManager.findFragmentByTag(MainActivity.PUZZLE_KEY);
+            if (puzzleFragment == null) {
+                puzzleFragment = new PuzzleFragment();
+            }
+            replaceFragment(puzzleFragment, MainActivity.PUZZLE_KEY);
         } else if (id == R.id.nav_game_two) {
 
         }
