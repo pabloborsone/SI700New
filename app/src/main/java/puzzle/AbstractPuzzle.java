@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractPuzzle {
-    private List<ImageView> imageViewArrayList = new ArrayList<>();
+    private List<ImageView> imageViewArrayList;
     private Board board = Boards.getPuzzle(0);
 
-    public  AbstractPuzzle(Board board,ArrayList<ImageView> imageViews) {
+    public  AbstractPuzzle(Board board, ArrayList<ImageView> imageViews) {
         this.board = board;
         this.imageViewArrayList = imageViews;
         startGame();
