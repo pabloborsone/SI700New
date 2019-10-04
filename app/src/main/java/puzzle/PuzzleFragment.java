@@ -21,6 +21,8 @@ import p185296_m203380.ft.unicamp.aula03_fragmentos.R;
 public class PuzzleFragment extends Fragment {
 
     private LinearLayout view;
+    private int dummyLine;
+    private int dummyColumn;
     public PuzzleFragment() {
         // Required empty public constructor
     }
@@ -41,7 +43,12 @@ public class PuzzleFragment extends Fragment {
                 imageView.setLayoutParams(new LinearLayout.LayoutParams(board.getWidth(),board.getHeight()));
                 imageView.setImageResource(board.getGameBlock(i, j));
 
+                if (board.getGameBlock(i,j) == R.drawable.dummy) {
+                    dummyLine = i;
+                    dummyColumn = j;
+                }
                 imageViews.add(imageView);
+                addListeners(imageView, i, j, board);
             }
         }
 
@@ -73,6 +80,15 @@ public class PuzzleFragment extends Fragment {
         }
 
         return view;
+    }
+
+    private void addListeners(ImageView imageView, final int line, final int column, final Board board) {
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
     }
 
 }

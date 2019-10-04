@@ -30,7 +30,7 @@ public class Board {
         return numColumns;
     }
 
-    public List getBlocks() {
+    public List<Integer> getBlocks() {
         return blocks;
     }
 
@@ -48,7 +48,7 @@ public class Board {
     }
 
     public int getCorrectBlock(int line, int column) {
-        return blocks.get((line * numColumns) + column);
+        return getBlocks().get((line * numColumns) + column);
     }
 
     public int getGameBlock(int line, int column) {
