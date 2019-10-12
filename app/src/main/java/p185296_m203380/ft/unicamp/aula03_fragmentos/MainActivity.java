@@ -1,5 +1,6 @@
 package p185296_m203380.ft.unicamp.aula03_fragmentos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 
 import alunos.AlunosFragment;
+import p185296_m203380.ft.unicamp.aula03_fragmentos.database.DatabaseFragment;
+import p185296_m203380.ft.unicamp.aula03_fragmentos.kotlin.EmptyActivity;
 import puzzle.PuzzleFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity
     public static final String STUDENTS_KEY = "students";
     public static final String BIOGRAPHY_KEY = "biography";
     public static final String PUZZLE_KEY = "puzzle";
+    public static final String GAME_KEY = "game";
+    public static final String DATABASE_KEY = "database";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +86,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -115,7 +119,19 @@ public class MainActivity extends AppCompatActivity
             }
             replaceFragment(puzzleFragment, MainActivity.PUZZLE_KEY);
         } else if (id == R.id.nav_game_two) {
-
+            Fragment nameFragment = fragmentManager.findFragmentByTag(MainActivity.GAME_KEY);
+            if (nameFragment == null) {
+                nameFragment = new NameFragment();
+            }
+            replaceFragment(nameFragment, MainActivity.GAME_KEY);
+        } else if (id == R.id.nav_kotlin) {
+            startActivity(new Intent(this, EmptyActivity.class));
+        } else if (id == R.id.nav_database) {
+            Fragment databaseFragment = fragmentManager.findFragmentByTag(MainActivity.DATABASE_KEY);
+            if (databaseFragment == null) {
+                databaseFragment = new DatabaseFragment();
+            }
+            replaceFragment(databaseFragment, MainActivity.DATABASE_KEY);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
