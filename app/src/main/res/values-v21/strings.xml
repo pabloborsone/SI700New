@@ -11,4 +11,7 @@
     <string name="kotlin_nav_text">Kotlin</string>
     <string name="nav_database">Banco de Dados</string>
     <string name="action_stats">Stats</string>
+    <string name="stats_first_text">Pessoa que o jogador menos sabe o nome</string>
+    <string name="stats_second_text">O nome que mais faz o jogador errar</string>
+    <string name="stats_third_text">Porcentagem de erros x jogadas</string>
 </resources>
