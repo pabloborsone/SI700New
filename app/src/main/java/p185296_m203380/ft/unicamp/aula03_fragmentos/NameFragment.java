@@ -10,20 +10,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
 import alunos.Aluno;
 import alunos.Alunos;
-import alunos.MyFirstAdapter;
 
 
-public class NameFragment extends Fragment implements FragmentController{
+public class NameFragment extends Fragment implements FragmentController {
 
     private View lview;
 
@@ -36,8 +35,6 @@ public class NameFragment extends Fragment implements FragmentController{
     private TextView txtTentativas;
     private TextView txtFeedback;
     private ArrayList<Button> arrayListButton;
-    private MyFirstAdapter mAdapter;
-
 
     public NameFragment() {
         // Required empty public constructor
@@ -45,29 +42,18 @@ public class NameFragment extends Fragment implements FragmentController{
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (lview == null) {
             lview = inflater.inflate(R.layout.fragment_name, container, false);
         }
 
-        mAdapter = new MyFirstAdapter(new ArrayList<>(Arrays.asList(Alunos.alunos)));
         imageView = lview.findViewById(R.id.imageFoto);
         txtTentativas = lview.findViewById(R.id.txtTentativas);
         txtFeedback = lview.findViewById(R.id.txtFeedback);
 
-        arrayListButton = new ArrayList<>();
-        arrayListButton.add((Button) lview.findViewById(R.id.button1));
-        arrayListButton.add((Button) lview.findViewById(R.id.button2));
-        arrayListButton.add((Button) lview.findViewById(R.id.button3));
-        arrayListButton.add((Button) lview.findViewById(R.id.button4));
-        arrayListButton.add((Button) lview.findViewById(R.id.button5));
-        arrayListButton.add((Button) lview.findViewById(R.id.button6));
-        arrayListButton.add((Button) lview.findViewById(R.id.button7));
-        arrayListButton.add((Button) lview.findViewById(R.id.button8));
-        arrayListButton.add((Button) lview.findViewById(R.id.button9));
-
+        buttonInit();
         startGame();
 
         View.OnClickListener guessButtonListener = new View.OnClickListener() {
@@ -85,7 +71,9 @@ public class NameFragment extends Fragment implements FragmentController{
                             }, 2000);
                 } else {
                     txtFeedback.setText("Incorreto!!");
-                    numTentativas--;
+                    if (numTentativas > 0) {
+                        numTentativas--;
+                    }
                     txtTentativas.setText("Tentativas: " + numTentativas);
 
                     if (numTentativas == 0) {
@@ -95,11 +83,11 @@ public class NameFragment extends Fragment implements FragmentController{
                                 new Runnable() {
                                     @Override
                                     public void run() {
-                                                    Bundle bundle = new Bundle();
-//                                                    bundle.putInt("position", position);
-                                                    BiographyFragment biography = new BiographyFragment();
-                                                    biography.setArguments(bundle);
-                                                    replaceFragment(biography, MainActivity.BIOGRAPHY_KEY);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("position", positionAluno);
+                                        BiographyFragment biography = new BiographyFragment();
+                                        biography.setArguments(bundle);
+                                        replaceFragment(biography, MainActivity.BIOGRAPHY_KEY);
                                     }
                                 }, 2000);
 
@@ -114,6 +102,19 @@ public class NameFragment extends Fragment implements FragmentController{
         }
 
         return lview;
+    }
+
+    private void buttonInit() {
+        arrayListButton = new ArrayList<>();
+        arrayListButton.add((Button) lview.findViewById(R.id.button1));
+        arrayListButton.add((Button) lview.findViewById(R.id.button2));
+        arrayListButton.add((Button) lview.findViewById(R.id.button3));
+        arrayListButton.add((Button) lview.findViewById(R.id.button4));
+        arrayListButton.add((Button) lview.findViewById(R.id.button5));
+        arrayListButton.add((Button) lview.findViewById(R.id.button6));
+        arrayListButton.add((Button) lview.findViewById(R.id.button7));
+        arrayListButton.add((Button) lview.findViewById(R.id.button8));
+        arrayListButton.add((Button) lview.findViewById(R.id.button9));
     }
 
     private void startGame() {

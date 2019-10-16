@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import p185296_m203380.ft.unicamp.aula03_fragmentos.R;
@@ -35,7 +37,7 @@ public class DatabaseFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
@@ -103,37 +105,51 @@ public class DatabaseFragment extends Fragment {
     }
 
     public void onInserir() {
-        int id = Integer.parseInt(edtId.getText().toString());
-        String texto = edtTexto.getText().toString();
+        try {
+            int id = Integer.parseInt(edtId.getText().toString());
+            String texto = edtTexto.getText().toString();
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("_id", id);
-        contentValues.put("texto", texto);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("_id", id);
+            contentValues.put("texto", texto);
 
 
-        sqLiteDatabase.insert("tabela", null, contentValues);
+            sqLiteDatabase.insert("tabela", null, contentValues);
+        } catch (NumberFormatException e) {
+            Toast.makeText(getContext(), "Ops... esse não é um ID válido. Utilize somente números", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public void onAtualizar() {
-        int id = Integer.parseInt(edtId.getText().toString());
-        String texto = edtTexto.getText().toString();
+        try {
+            int id = Integer.parseInt(edtId.getText().toString());
+            String texto = edtTexto.getText().toString();
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("texto", texto);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("texto", texto);
 
-        String whereClause = "_id = ?";
-        String[] whereArgs = new String[]{Integer.toString(id)};
+            String whereClause = "_id = ?";
+            String[] whereArgs = new String[]{Integer.toString(id)};
 
-        sqLiteDatabase.update("tabela", contentValues, whereClause, whereArgs);
+            sqLiteDatabase.update("tabela", contentValues, whereClause, whereArgs);
+        } catch (NumberFormatException e) {
+            Toast.makeText(getContext(), "Ops... Não há o que atualizar", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public void onRemover() {
-        int id = Integer.parseInt(edtId.getText().toString());
+        try {
+            int id = Integer.parseInt(edtId.getText().toString());
 
-        String whereClause = "_id = ?";
-        String[] whereArgs = new String[]{Integer.toString(id)};
+            String whereClause = "_id = ?";
+            String[] whereArgs = new String[]{Integer.toString(id)};
 
-        sqLiteDatabase.delete("tabela", whereClause, whereArgs);
+            sqLiteDatabase.delete("tabela", whereClause, whereArgs);
+        } catch (NumberFormatException e) {
+            Toast.makeText(getContext(), "Ops... Não há o que remover", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void onSelecionar() {
@@ -142,19 +158,17 @@ public class DatabaseFragment extends Fragment {
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
 
         if (cursor.moveToFirst()) {
-            String str = "";
+            StringBuilder str = new StringBuilder();
             do {
                 int id = cursor.getInt(0);
                 String texto = cursor.getString(1);
 
-                str = str + id + "," + texto + "\n";
+                str.append(id).append(", ").append(texto).append("\n");
 
             } while (cursor.moveToNext());
-            txtOutput.setText(str);
+            txtOutput.append(str.toString());
         }
         cursor.close();
 
     }
-
-
 }

@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 import alunos.AlunosFragment;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.database.DatabaseFragment;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.kotlin.EmptyActivity;
+import p185296_m203380.ft.unicamp.aula03_fragmentos.kotlin.StatsFragment;
 import puzzle.PuzzleFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     public static final String PUZZLE_KEY = "puzzle";
     public static final String GAME_KEY = "game";
     public static final String DATABASE_KEY = "database";
+    public static final String STATS_KEY = "stats";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,12 @@ public class MainActivity extends AppCompatActivity
             }
             replaceFragment(mailFragment, MainActivity.MAIL_KEY);
             return true;
+        } else if (id == R.id.action_stats) {
+            Fragment statsFragment = fragmentManager.findFragmentByTag(MainActivity.STATS_KEY);
+            if (statsFragment == null) {
+                statsFragment = new StatsFragment();
+            }
+            replaceFragment(statsFragment, MainActivity.STATS_KEY);
         }
 
         return super.onOptionsItemSelected(item);

@@ -61,5 +61,6 @@
     <string name="next_biography_button_text">next</string>
     <string name="kotlin_nav_text">Kotlin</string>
     <string name="nav_database">Banco de Dados</string>
+    <string name="action_stats">Stats</string>
 
 </resources>
