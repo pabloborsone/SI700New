@@ -72,7 +72,7 @@ public class NameFragment extends Fragment implements FragmentController {
 
                     Cursor cursor = sqLiteDatabase.rawQuery("Select * from tabela", null);
                     cursor.move(positionAluno);
-                    int acertosAtuais = Integer.valueOf(cursor.getString(2));
+                    int acertosAtuais = Integer.valueOf(cursor.getString(3));
                     ContentValues cv = new ContentValues();
                     cv.put("Acertos", ++acertosAtuais);
                     sqLiteDatabase.update("tabela", cv, "_id=" + (positionAluno + 1), null);
@@ -90,7 +90,7 @@ public class NameFragment extends Fragment implements FragmentController {
                         numTentativas--;
                         Cursor cursor = sqLiteDatabase.rawQuery("Select * from tabela", null);
                         cursor.move(positionAluno);
-                        int errosAtuais = Integer.valueOf(cursor.getString(3));
+                        int errosAtuais = Integer.valueOf(cursor.getString(4));
                         ContentValues cv = new ContentValues();
                         cv.put("Erros", ++errosAtuais);
                         sqLiteDatabase.update("tabela", cv, "_id=" + (positionAluno + 1), null);
@@ -100,7 +100,7 @@ public class NameFragment extends Fragment implements FragmentController {
                         if (cursor1.moveToFirst()) {
                             do {
                                 if (cursor1.getString(1).equals(nomeEscolhido)) {
-                                    int popularidadeAtual = cursor1.getInt(4);
+                                    int popularidadeAtual = cursor1.getInt(5);
                                     ContentValues contentValues = new ContentValues();
                                     contentValues.put("Popularidade", ++popularidadeAtual);
                                     sqLiteDatabase.update("tabela", contentValues, "_id=" + cursor1.getPosition(), null);
