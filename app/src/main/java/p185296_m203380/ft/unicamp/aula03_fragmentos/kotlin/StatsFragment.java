@@ -31,6 +31,7 @@ public class StatsFragment extends Fragment implements FragmentController {
     private int comparadorErros = 0;
     private int qtdErros = 0;
     private int qtdAcertos = 0;
+    private int popularidadeAtual = 0;
 
     public StatsFragment() {
     }
@@ -58,7 +59,6 @@ public class StatsFragment extends Fragment implements FragmentController {
 
         dbHelper = new DatabaseHelper(getActivity());
         sqLiteDatabase = dbHelper.getReadableDatabase();
-//        onInserir();
         onSelecionar();
     }
 
@@ -80,48 +80,35 @@ public class StatsFragment extends Fragment implements FragmentController {
         fragmentTransaction.commit();
     }
 
-
-    public void onInserir() {
-        try {
-            int id = Integer.parseInt("1");
-            String name = "Testando";
-
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("_id", id);
-            contentValues.put("Nome", name);
-            contentValues.put("Acertos", 0);
-            contentValues.put("Erros", 5);
-
-            sqLiteDatabase.insert("tabela", null, contentValues);
-        } catch (NumberFormatException e) {
-            Toast.makeText(getContext(), "Ops... esse não é um ID válido. Utilize somente números", Toast.LENGTH_LONG).show();
-        }
-
-    }
-
     public void onSelecionar() {
         String sql = "Select * from tabela";
 
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
 
         if (cursor.moveToFirst()) {
-            String str = null;
+            String str = "Nothing yet";
+            String worstName = "Nothing yet";
             do {
                 String nome = cursor.getString(1);
                 int acertos = cursor.getInt(2);
                 int erros = cursor.getInt(3);
+                int popularidade = cursor.getInt(4);
 
                 if (comparadorErros < erros) {
                     comparadorErros = erros;
                     str = nome;
                 }
-                qtdAcertos += acertos;
-                qtdErros += erros;
+                if (popularidadeAtual < popularidade) {
+                    popularidadeAtual = popularidade;
+                    worstName = nome;
+                }
+                qtdAcertos = qtdAcertos + acertos;
+                qtdErros = qtdErros + erros;
             } while (cursor.moveToNext());
 
             firstValue.setText(str);
-            secondValue.setText(str);
-            int porcentagem = ((qtdErros / (qtdAcertos+qtdErros)) * 100);
+            secondValue.setText(worstName);
+            double porcentagem = (((double)qtdErros / (qtdAcertos+qtdErros)) * 100);
             thirdValue.setText(porcentagem + "%");
         }
         cursor.close();
