@@ -1,6 +1,9 @@
 package p185296_m203380.ft.unicamp.aula03_fragmentos;
 
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,6 +24,7 @@ import java.util.Random;
 
 import alunos.Aluno;
 import alunos.Alunos;
+import p185296_m203380.ft.unicamp.aula03_fragmentos.database.DatabaseHelper;
 
 
 public class NameFragment extends Fragment implements FragmentController {
@@ -36,13 +41,16 @@ public class NameFragment extends Fragment implements FragmentController {
     private TextView txtFeedback;
     private ArrayList<Button> arrayListButton;
 
+    private DatabaseHelper dbHelper;
+    private SQLiteDatabase sqLiteDatabase;
+
     public NameFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (lview == null) {
@@ -56,12 +64,19 @@ public class NameFragment extends Fragment implements FragmentController {
         buttonInit();
         startGame();
 
-        View.OnClickListener guessButtonListener = new View.OnClickListener() {
+        final View.OnClickListener guessButtonListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String nomeEscolhido = ((Button) v).getText().toString();
                 if (nomeEscolhido.equals(nomeCorreto)) {
                     txtFeedback.setText("Correto!!");
+
+                    Cursor cursor = sqLiteDatabase.rawQuery("Select * from tabela", null);
+                    cursor.move(positionAluno);
+                    int acertosAtuais = Integer.valueOf(cursor.getString(2));
+                    ContentValues cv = new ContentValues();
+                    cv.put("Acertos", ++acertosAtuais);
+                    sqLiteDatabase.update("tabela", cv, "_id=" + (positionAluno + 1), null);
                     new Handler().postDelayed(
                             new Runnable() {
                                 @Override
@@ -69,10 +84,31 @@ public class NameFragment extends Fragment implements FragmentController {
                                     startGame();
                                 }
                             }, 2000);
+                    cursor.close();
                 } else {
                     txtFeedback.setText("Incorreto!!");
                     if (numTentativas > 0) {
                         numTentativas--;
+                        Cursor cursor = sqLiteDatabase.rawQuery("Select * from tabela", null);
+                        cursor.move(positionAluno);
+                        int errosAtuais = Integer.valueOf(cursor.getString(3));
+                        ContentValues cv = new ContentValues();
+                        cv.put("Erros", ++errosAtuais);
+                        sqLiteDatabase.update("tabela", cv, "_id=" + (positionAluno + 1), null);
+                        cursor.close();
+
+                        Cursor cursor1 = sqLiteDatabase.rawQuery("Select Nome from tabela where trim(Nome) = '"+nomeEscolhido.trim()+"'", null);
+                        if (cursor1.moveToFirst()) {
+                            do {
+                                if (cursor1.getString(1).equals(nomeEscolhido)) {
+                                    int popularidadeAtual = cursor1.getInt(4);
+                                    ContentValues contentValues = new ContentValues();
+                                    contentValues.put("Popularidade", ++popularidadeAtual);
+                                    sqLiteDatabase.update("tabela", contentValues, "_id=" + cursor1.getPosition(), null);
+                                }
+                            } while (cursor1.moveToNext());
+                        }
+                        cursor1.close();
                     }
                     txtTentativas.setText("Tentativas: " + numTentativas);
 
@@ -102,6 +138,23 @@ public class NameFragment extends Fragment implements FragmentController {
         }
 
         return lview;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        dbHelper = new DatabaseHelper(getActivity());
+        sqLiteDatabase = dbHelper.getReadableDatabase();
+        addStudentsToDatabase();
+//        onInserir();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        sqLiteDatabase.close();
+        dbHelper.close();
     }
 
     private void buttonInit() {
@@ -135,6 +188,20 @@ public class NameFragment extends Fragment implements FragmentController {
         Collections.shuffle(arrayList);
         for (int i = 0; i < 9; i++) {
             arrayListButton.get(i).setText(arrayList.get(i));
+        }
+    }
+
+    private void addStudentsToDatabase() {
+        if (sqLiteDatabase.getPageSize() != 0) {
+            for (Aluno alunos : Alunos.alunos) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("Nome", alunos.getNome());
+                contentValues.put("Acertos", 0);
+                contentValues.put("Erros", 0);
+                contentValues.put("Popularidade", 0);
+
+                sqLiteDatabase.insert("tabela", null, contentValues);
+            }
         }
     }
 

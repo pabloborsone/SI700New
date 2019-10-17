@@ -28,6 +28,9 @@ public class StatsFragment extends Fragment implements FragmentController {
     private TextView firstValue;
     private TextView secondValue;
     private TextView thirdValue;
+    private int comparadorErros = 0;
+    private int qtdErros = 0;
+    private int qtdAcertos = 0;
 
     public StatsFragment() {
     }
@@ -55,7 +58,7 @@ public class StatsFragment extends Fragment implements FragmentController {
 
         dbHelper = new DatabaseHelper(getActivity());
         sqLiteDatabase = dbHelper.getReadableDatabase();
-        onInserir();
+//        onInserir();
         onSelecionar();
     }
 
@@ -87,8 +90,7 @@ public class StatsFragment extends Fragment implements FragmentController {
             contentValues.put("_id", id);
             contentValues.put("Nome", name);
             contentValues.put("Acertos", 0);
-            contentValues.put("Erros", 0);
-
+            contentValues.put("Erros", 5);
 
             sqLiteDatabase.insert("tabela", null, contentValues);
         } catch (NumberFormatException e) {
@@ -103,17 +105,24 @@ public class StatsFragment extends Fragment implements FragmentController {
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
 
         if (cursor.moveToFirst()) {
-            StringBuilder str = new StringBuilder();
+            String str = null;
             do {
-                int id = cursor.getInt(0);
                 String nome = cursor.getString(1);
-                int acertos = cursor.getInt(1);
-                int erros = cursor.getInt(1);
+                int acertos = cursor.getInt(2);
+                int erros = cursor.getInt(3);
 
-                str.append(id).append(" ").append(nome).append(" ").append(acertos).append(" ").append(erros).append("\n");
-
+                if (comparadorErros < erros) {
+                    comparadorErros = erros;
+                    str = nome;
+                }
+                qtdAcertos += acertos;
+                qtdErros += erros;
             } while (cursor.moveToNext());
-            firstValue.append(str.toString());
+
+            firstValue.setText(str);
+            secondValue.setText(str);
+            int porcentagem = ((qtdErros / (qtdAcertos+qtdErros)) * 100);
+            thirdValue.setText(porcentagem + "%");
         }
         cursor.close();
 

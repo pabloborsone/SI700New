@@ -24,12 +24,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         db.execSQL("CREATE TABLE tabela " +
-                "(_id INTEGER PRIMARY KEY, " +
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "Nome Text, " +
                 "Acertos INTEGER, " +
-                "Erros INTEGER);");
-
-
+                "Erros INTEGER, " +
+                "Popularidade INTEGER);");
     }
 
     @Override
