@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -97,7 +96,7 @@ public class NameFragment extends Fragment implements FragmentController {
                         sqLiteDatabase.update("tabela", cv, "_id=" + (positionAluno + 1), null);
                         cursor.close();
 
-                        Cursor cursor1 = sqLiteDatabase.rawQuery("Select Nome from tabela where trim(Nome) = '"+nomeEscolhido.trim()+"'", null);
+                        Cursor cursor1 = sqLiteDatabase.rawQuery("Select * from tabela", null);
                         if (cursor1.moveToFirst()) {
                             do {
                                 if (cursor1.getString(1).equals(nomeEscolhido)) {
@@ -192,7 +191,10 @@ public class NameFragment extends Fragment implements FragmentController {
     }
 
     private void addStudentsToDatabase() {
-        if (sqLiteDatabase.getPageSize() != 0) {
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT count(*) FROM tabela", null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0);
+        if (count == 0) {
             for (Aluno alunos : Alunos.alunos) {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("Nome", alunos.getNome());
@@ -203,6 +205,7 @@ public class NameFragment extends Fragment implements FragmentController {
                 sqLiteDatabase.insert("tabela", null, contentValues);
             }
         }
+        cursor.close();
     }
 
     public void replaceFragment(Fragment fragment, String key) {
