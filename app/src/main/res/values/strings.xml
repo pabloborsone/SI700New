@@ -13,7 +13,9 @@
     <string name="menu_biography">Biografias</string>
     <string name="menu_game_one">Jogo 1</string>
     <string name="menu_game_two">Jogo 2</string>
+    <string name="menu_game_three">Jogo 3</string>
     <string name="menu_send">Send</string>
+    <string name="menu_internet">Internet</string>
 
     <string name="first_name">Pablo Borsone</string>
     <string name="first_ra">RA: 185296</string>
@@ -61,9 +63,12 @@
     <string name="next_biography_button_text">next</string>
     <string name="kotlin_nav_text">Kotlin</string>
     <string name="nav_database">Banco de Dados</string>
+    <string name="nav_internet">Internet</string>
     <string name="action_stats">Stats</string>
     <string name="stats_first_text">Pessoa que o jogador menos sabe o nome</string>
     <string name="stats_second_text">O nome que mais faz o jogador errar</string>
     <string name="stats_third_text">Porcentagem de erros x jogadas</string>
+    <string name="radius_atualizar">Trocar</string>
+    <string name="radius_enviar">Validar</string>
 
 </resources>

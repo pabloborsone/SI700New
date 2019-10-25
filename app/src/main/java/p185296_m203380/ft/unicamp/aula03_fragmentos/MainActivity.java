@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
+import Internet.InternetFragment;
+import Internet.RadiusFragment;
 import alunos.AlunosFragment;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.database.DatabaseFragment;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.kotlin.EmptyActivity;
@@ -33,8 +35,10 @@ public class MainActivity extends AppCompatActivity
     public static final String BIOGRAPHY_KEY = "biography";
     public static final String PUZZLE_KEY = "puzzle";
     public static final String GAME_KEY = "game";
+    public static final String RADIUS_KEY = "radius";
     public static final String DATABASE_KEY = "database";
     public static final String STATS_KEY = "stats";
+    public static final String INTERNET_KEY = "internet";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +136,12 @@ public class MainActivity extends AppCompatActivity
                 nameFragment = new NameFragment();
             }
             replaceFragment(nameFragment, MainActivity.GAME_KEY);
+        } else if (id == R.id.nav_game_three) {
+            Fragment radiusFragment = fragmentManager.findFragmentByTag(MainActivity.RADIUS_KEY);
+            if (radiusFragment == null) {
+                radiusFragment = new RadiusFragment();
+            }
+            replaceFragment(radiusFragment, MainActivity.GAME_KEY);
         } else if (id == R.id.nav_kotlin) {
             startActivity(new Intent(this, EmptyActivity.class));
         } else if (id == R.id.nav_database) {
@@ -140,6 +150,12 @@ public class MainActivity extends AppCompatActivity
                 databaseFragment = new DatabaseFragment();
             }
             replaceFragment(databaseFragment, MainActivity.DATABASE_KEY);
+        }  if (id == R.id.nav_internet) {
+                Fragment internetFragment = fragmentManager.findFragmentByTag(MainActivity.INTERNET_KEY);
+                if (internetFragment == null) {
+                    internetFragment = new InternetFragment();
+                }
+                replaceFragment(internetFragment, MainActivity.INTERNET_KEY);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

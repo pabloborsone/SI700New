@@ -25,6 +25,10 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/menu_game_two"/>
         <item
+            android:id="@+id/nav_game_three"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/menu_game_three"/>
+        <item
             android:id="@+id/nav_kotlin"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/kotlin_nav_text"
@@ -33,6 +37,11 @@
             android:id="@+id/nav_database"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/nav_database"
+            />
+        <item
+            android:id="@+id/nav_internet"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/nav_internet"
             />
     </group>
 
