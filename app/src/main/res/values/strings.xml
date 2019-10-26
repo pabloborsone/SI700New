@@ -25,30 +25,27 @@
     <string name="second_description">Entusiasta por tudo que é tecnologia e basquete.</string>
 
     <string name="menu_title">Communicate</string>
-
     <string name="menu_home">Home</string>
-
     <string name="menu_gallery">Gallery</string>
-
     <string name="menu_slideshow">Slideshow</string>
-
     <string name="menu_tools">Tools</string>
-
     <string name="menu_share">Share</string>
 
     <string name="icon_text">what is going on</string>
-
     <string name="to_recipient">Recipient:</string>
-
     <string name="message">Type your Message</string>
-
     <string name="send">Send</string>
 
     <string name="password">Password:</string>
-
     <string name="subject">Subject:</string>
-
     <string name="linear_login">Login:</string>
+    
+    <string-array name="rest_request" >
+        <item>GET</item>
+        <item>PUT</item>
+        <item>POST</item>
+        <item>PATCH</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
