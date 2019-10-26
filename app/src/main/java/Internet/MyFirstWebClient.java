@@ -52,9 +52,7 @@ public class MyFirstWebClient extends AsyncTask<String, Void, String> {
                 outputStreamWriter.flush();
                 outputStreamWriter.close();
             }
-        /*
-          Lendo a resposta do servidor
-        */
+
             BufferedReader reader = new BufferedReader(new
                     InputStreamReader(httpURLConnection.getInputStream()));
 

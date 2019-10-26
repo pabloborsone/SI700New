@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity
             if (radiusFragment == null) {
                 radiusFragment = new RadiusFragment();
             }
-            replaceFragment(radiusFragment, MainActivity.GAME_KEY);
+            replaceFragment(radiusFragment, MainActivity.RADIUS_KEY);
         } else if (id == R.id.nav_kotlin) {
             startActivity(new Intent(this, EmptyActivity.class));
         } else if (id == R.id.nav_database) {
