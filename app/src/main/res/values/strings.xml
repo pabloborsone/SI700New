@@ -40,7 +40,7 @@
     <string name="subject">Subject:</string>
     <string name="linear_login">Login:</string>
     
-    <string-array name="rest_request" >
+    <string-array name="rest_requests" >
         <item>GET</item>
         <item>PUT</item>
         <item>POST</item>

@@ -31,7 +31,7 @@ public class MyFirstWebClient extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... args) {
-        if (args.length == 3) {
+        if (args.length == 0) {
             return "No Parameter";
         }
 

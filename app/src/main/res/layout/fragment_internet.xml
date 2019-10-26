@@ -30,7 +30,7 @@
         android:entries="@array/rest_requests" />
     <Button
         android:id="@+id/btnViaCep"
-        android:layout_width="60dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Get Data"/>
+        android:text="Execute Command"/>
 </LinearLayout>
