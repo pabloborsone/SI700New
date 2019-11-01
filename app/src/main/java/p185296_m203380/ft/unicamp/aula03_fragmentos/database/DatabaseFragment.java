@@ -56,7 +56,7 @@ public class DatabaseFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        onInserir();
+                        onInsert();
                     }
                 }
         );
@@ -104,7 +104,7 @@ public class DatabaseFragment extends Fragment {
         dbHelper.close();
     }
 
-    public void onInserir() {
+    public void onInsert() {
         try {
             int id = Integer.parseInt(edtId.getText().toString());
             String texto = edtTexto.getText().toString();

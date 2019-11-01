@@ -72,9 +72,9 @@ public class NameFragment extends Fragment implements FragmentController {
 
                     Cursor cursor = sqLiteDatabase.rawQuery("Select * from tabela", null);
                     cursor.move(positionAluno);
-                    int acertosAtuais = Integer.valueOf(cursor.getString(2));
+                    int hitsAtuais = Integer.valueOf(cursor.getString(2));
                     ContentValues cv = new ContentValues();
-                    cv.put("Acertos", ++acertosAtuais);
+                    cv.put("Acertos", ++hitsAtuais);
                     sqLiteDatabase.update("tabela", cv, "_id=" + (positionAluno + 1), null);
                     new Handler().postDelayed(
                             new Runnable() {
@@ -147,7 +147,6 @@ public class NameFragment extends Fragment implements FragmentController {
         dbHelper = new DatabaseHelper(getActivity());
         sqLiteDatabase = dbHelper.getReadableDatabase();
         addStudentsToDatabase();
-//        onInserir();
     }
 
     @Override

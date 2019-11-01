@@ -28,6 +28,7 @@ public class RadiusFragment extends Fragment {
     private RadioButton radioButton3;
     private RadioButton radioButton4;
     private RadioButton radioButton5;
+    private String answer;
 
     public RadiusFragment() {
         // Required empty public constructor
@@ -47,12 +48,15 @@ public class RadiusFragment extends Fragment {
             if (selectedRadioButton.getText().toString().equals(internetGame.getName())) {
                 Toast toast = Toast.makeText(view.getContext(), "Correto", Toast.LENGTH_SHORT);
                 toast.show();
+                answer = "Acertos";
             } else {
                 Toast toast = Toast.makeText(view.getContext(), "Errou", Toast.LENGTH_SHORT);
                 toast.show();
+                answer = "Erros";
             }
         }
         updateGame();
+        new InternetGameStatus(internetGame.getName(), answer).execute();
         radioGroup.clearCheck();
     }
 

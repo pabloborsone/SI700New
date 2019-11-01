@@ -90,7 +90,7 @@ public class StatsFragment extends Fragment implements FragmentController {
             String worstName = "Nothing yet";
             do {
                 String nome = cursor.getString(1);
-                int acertos = cursor.getInt(2);
+                int hits = cursor.getInt(2);
                 int erros = cursor.getInt(3);
                 int popularidade = cursor.getInt(4);
 
@@ -102,7 +102,7 @@ public class StatsFragment extends Fragment implements FragmentController {
                     popularidadeAtual = popularidade;
                     worstName = nome;
                 }
-                qtdAcertos = qtdAcertos + acertos;
+                qtdAcertos = qtdAcertos + hits;
                 qtdErros = qtdErros + erros;
             } while (cursor.moveToNext());
 

@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 
 import Internet.InternetFragment;
+import Internet.InternetGameFragment;
 import Internet.RadiusFragment;
 import alunos.AlunosFragment;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.database.DatabaseFragment;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity
     public static final String DATABASE_KEY = "database";
     public static final String STATS_KEY = "stats";
     public static final String INTERNET_KEY = "internet";
+    public static final String SCORE_KEY = "score";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +95,13 @@ public class MainActivity extends AppCompatActivity
                 statsFragment = new StatsFragment();
             }
             replaceFragment(statsFragment, MainActivity.STATS_KEY);
+        } else if (id == R.id.action_status) {
+            Fragment internetGameFragment = fragmentManager.findFragmentByTag(MainActivity.SCORE_KEY);
+            if (internetGameFragment == null) {
+                internetGameFragment = new InternetGameFragment();
+            }
+            replaceFragment(internetGameFragment, MainActivity.SCORE_KEY);
         }
-
         return super.onOptionsItemSelected(item);
     }
 

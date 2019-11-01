@@ -39,8 +39,8 @@
     <string name="password">Password:</string>
     <string name="subject">Subject:</string>
     <string name="linear_login">Login:</string>
-    
-    <string-array name="rest_requests" >
+
+    <string-array name="rest_requests">
         <item>GET</item>
         <item>PUT</item>
         <item>POST</item>
@@ -67,5 +67,6 @@
     <string name="stats_third_text">Porcentagem de erros x jogadas</string>
     <string name="radius_atualizar">Trocar</string>
     <string name="radius_enviar">Validar</string>
+    <string name="action_score">Status Jogo 3</string>
 
 </resources>
