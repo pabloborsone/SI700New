@@ -23,6 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AuthorsFragment" />
+        <activity android:name="signin.SigninActivity" />
+
+        <service android:name="signin.MyFirebaseMessagingService" />
     </application>
 
 </manifest>

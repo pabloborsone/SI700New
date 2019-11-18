@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import Internet.InternetFragment;
 import Internet.InternetGameFragment;
@@ -25,6 +27,7 @@ import p185296_m203380.ft.unicamp.aula03_fragmentos.database.DatabaseFragment;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.kotlin.EmptyActivity;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.kotlin.StatsFragment;
 import puzzle.PuzzleFragment;
+import signin.SigninActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentController {
@@ -42,6 +45,9 @@ public class MainActivity extends AppCompatActivity
     public static final String INTERNET_KEY = "internet";
     public static final String SCORE_KEY = "score";
 
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +61,18 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+        if (mFirebaseUser == null) {
+            startActivity(new Intent(this, SigninActivity.class));
+        }
     }
 
     @Override

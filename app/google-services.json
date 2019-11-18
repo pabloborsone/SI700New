@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "199088929532",
+    "firebase_url": "https://aula-10-1d28e.firebaseio.com",
+    "project_id": "aula-10-1d28e",
+    "storage_bucket": "aula-10-1d28e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199088929532:android:a91b45f0e391b7044d3579",
+        "android_client_info": {
+          "package_name": "p185296_m203380.ft.unicamp.aula03_fragmentos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199088929532-40lh9as7st30vvpu6r0rrrvbvm7fnms0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA07mV9y9ONn79ihbXydI2RR9dpOoniqa0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199088929532-40lh9as7st30vvpu6r0rrrvbvm7fnms0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

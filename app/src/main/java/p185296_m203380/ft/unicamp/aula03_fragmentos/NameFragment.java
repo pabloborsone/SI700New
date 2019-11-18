@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -24,6 +31,7 @@ import java.util.Random;
 import alunos.Aluno;
 import alunos.Alunos;
 import p185296_m203380.ft.unicamp.aula03_fragmentos.database.DatabaseHelper;
+import signin.Resposta;
 
 
 public class NameFragment extends Fragment implements FragmentController {
@@ -42,6 +50,8 @@ public class NameFragment extends Fragment implements FragmentController {
 
     private DatabaseHelper dbHelper;
     private SQLiteDatabase sqLiteDatabase;
+
+    private DatabaseReference mFirebaseDatabaseReference;
 
     public NameFragment() {
         // Required empty public constructor
@@ -69,6 +79,9 @@ public class NameFragment extends Fragment implements FragmentController {
                 String nomeEscolhido = ((Button) v).getText().toString();
                 if (nomeEscolhido.equals(nomeCorreto)) {
                     txtFeedback.setText("Correto!!");
+                    Resposta resposta = new Resposta("nome_jogo", nomeCorreto, nomeEscolhido);
+                    mFirebaseDatabaseReference.child("respostas")
+                            .push().setValue(resposta);
 
                     Cursor cursor = sqLiteDatabase.rawQuery("Select * from tabela", null);
                     cursor.move(positionAluno);
@@ -146,7 +159,25 @@ public class NameFragment extends Fragment implements FragmentController {
 
         dbHelper = new DatabaseHelper(getActivity());
         sqLiteDatabase = dbHelper.getReadableDatabase();
+        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         addStudentsToDatabase();
+
+        mFirebaseDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot remoteRespostas : dataSnapshot.getChildren()) {
+                    for (DataSnapshot remoteResposta : remoteRespostas.getChildren()) {
+                        Resposta resposta = remoteResposta.getValue(Resposta.class);
+                        Log.v("DATASET", resposta.getAnswer() + "-" + resposta.getChosen());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w(getTag(), "Failed to read value.", error.toException());
+            }
+        });
     }
 
     @Override
